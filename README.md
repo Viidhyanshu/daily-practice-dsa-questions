@@ -1,2 +1,2 @@
-added 696 solution 
+added 762 solution 
 
