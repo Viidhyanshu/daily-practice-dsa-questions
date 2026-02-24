@@ -29,3 +29,22 @@ The number of nodes in the tree is in the range [1, 1000].
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+
+
+
+  //solution 
+  class Solution {
+public:
+int solve(TreeNode* root, int val){
+    if(!root) 
+    return 0;
+    val= (2 * val) + root -> val;
+    if(root->left==NULL && root->right==NULL)
+    return val;
+    return solve(root -> left, val)+ solve(root -> right, val);
+}
+    int sumRootToLeaf(TreeNode* root) {
+      return solve(root, 0);  
+    }
+};
