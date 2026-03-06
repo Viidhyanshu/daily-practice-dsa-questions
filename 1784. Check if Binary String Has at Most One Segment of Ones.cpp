@@ -18,3 +18,14 @@ Constraints:
 1 <= s.length <= 100
 s[i]​​​​ is either '0' or '1'.
 s[0] is '1'.
+
+
+ //solution
+ class Solution {
+public:
+    bool checkOnesSegment(string s) { 
+      return s.find("01") == string::npos; 
+    }
+};
+
+
