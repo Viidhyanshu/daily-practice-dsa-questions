@@ -46,3 +46,38 @@ All the possible stable binary arrays are [0,0,1,0,1,1], [0,0,1,1,0,1], [0,1,0,0
 Constraints:
 
 1 <= zero, one, limit <= 1000
+
+
+
+ //solution
+ typedef long long ll;
+class Solution {
+public:
+    const ll mod = 1e9+7;
+    ll dp[1001][1001][2];
+    ll f(ll a, ll b, ll last, ll k)
+    {
+        if(a<0 || b<0) return 0;
+        if(a==0 && b==0) return 0;
+        if(a==0 || b==0){
+            if(a==0){
+                return last==1 && b<=k;
+            }
+            else
+            {
+                return last==0 && a<=k;
+            }
+        }
+        if(dp[a][b][last]!=-1) return dp[a][b][last];
+        if(last == 0){
+            return dp[a][b][last] = ((f(a-1,b,0,k) + f(a-1,b,1,k))%mod - (f(a-k-1,b,1,k)%mod) + mod)%mod;
+        }
+        else{
+            return dp[a][b][last] = ((f(a,b-1,1,k)+f(a,b-1,0,k))%mod-(f(a,b-k-1,0,k)%mod) + mod)%mod;
+        }
+    }
+    int numberOfStableArrays(int zero, int one, int k) {
+        memset(dp,-1,sizeof(dp));
+        return (f(zero,one,0,k)+f(zero,one,1,k))%mod;
+    }
+};
