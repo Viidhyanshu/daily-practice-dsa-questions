@@ -21,3 +21,18 @@ Constraints:
 
 1 <= num < 231
 
+
+
+ //solution
+ class Solution {
+public:
+    int findComplement(int num) {
+        unsigned int mask = 0, temp = num;
+        while(temp){
+            mask |= temp | 1;
+            temp >>= 1;
+        }
+
+        return num ^ mask;
+    }
+};
