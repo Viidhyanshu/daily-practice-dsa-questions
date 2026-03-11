@@ -25,3 +25,21 @@ Explanation: 10 is "1010" in binary, with complement "0101" in binary, which is 
 Constraints:
 
 0 <= n < 109
+
+
+
+
+
+ //solution
+ class Solution {
+public:
+    int bitwiseComplement(int n) {
+        if (n == 0)
+            return 1;
+        int a = 2;
+        int i = 0;
+        while (n > (pow(a, i) - 1))
+            i++;
+        return pow(a, i) - 1 - n;
+    }
+};
