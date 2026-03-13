@@ -57,3 +57,34 @@ Constraints:
 1 <= mountainHeight <= 105
 1 <= workerTimes.length <= 104
 1 <= workerTimes[i] <= 106
+
+
+
+
+//solution
+class Solution {
+public:
+    long long minNumberOfSeconds(int mountainHeight, vector<int>& workerTimes) {
+        sort(workerTimes.begin(),workerTimes.end());
+        vector<long long> nn1(mountainHeight+1,0);
+        for(int i=0;i<=mountainHeight;i++) nn1[i]=((long long)i*(i+1))/2;
+        auto searchNN1=[&](long long y){
+            int l=0,r=nn1.size()-1;
+            while(l<r){
+                int m=(l+r+1)/2;
+                if(nn1[m]<=y) l=m;
+                else r=m-1;
+            }
+            return l;
+        };
+        long long l=0, r=nn1.back()*workerTimes[0];
+        while(l<r){
+            long long m=(l+r-1)/2;
+            int total = 0;
+            for(auto w: workerTimes) total+=searchNN1(m/w);
+            if(total>=mountainHeight) r=m;
+            else l=m+1;
+        }
+        return l;
+    }
+};
