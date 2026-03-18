@@ -40,3 +40,22 @@ Constraints:
 1 <= nums.length <= 3 * 104
 -100 <= nums[i] <= 100
 nums is sorted in non-decreasing order.
+
+
+    //solution
+    class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        if(nums.size() == 0) return 0;
+        int v =1;
+        int n = nums.size();
+        for(int i =1; i< n; i++){
+            if(nums[i] != nums[i-1]){
+                nums[v]= nums[i];
+                v++;
+            }
+        }
+        return v;
+        
+    }
+};
