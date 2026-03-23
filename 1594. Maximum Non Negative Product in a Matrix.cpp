@@ -9,4 +9,40 @@ Notice that the modulo is performed after getting the maximum product.
 
 
   //solution
-  
+  class Solution {
+public:
+    int maxProductPath(vector<vector<int>>& grid) {
+        const long long mod = 1e9 + 7;
+        int m = grid.size(), n = grid[0].size();
+        vector<long long> maxProd(n), minProd(n);
+        maxProd[0] = minProd[0] = grid[0][0];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == 0 && j == 0) continue;
+                long long curr = grid[i][j];
+                if (i == 0) {
+                    maxProd[j] = minProd[j] = maxProd[j-1] * curr;
+                } else if (j == 0) {
+                    maxProd[j] = minProd[j] = maxProd[j] * curr;
+                } else {
+                    long long mx = max(maxProd[j-1], maxProd[j]);
+                    long long mn = min(minProd[j-1], minProd[j]);
+                    
+                    if (curr >= 0) {
+                        maxProd[j] = mx * curr;
+                        minProd[j] = mn * curr;
+                    } else {
+                        maxProd[j] = mn * curr;
+                        minProd[j] = mx * curr;
+                    }
+                }
+            }
+        }
+        return maxProd[n-1] < 0 ? -1 : maxProd[n-1] % mod;
+    }
+};
+
+
+Time comp = O(mn)
+Space comp = O(n)
+
