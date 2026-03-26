@@ -16,7 +16,7 @@ Input: grid = [[1,4],[2,3]]
 Output: true
 
 
-//solution
+//solution - Using Prefix sum
 class Solution {
 public:
     typedef long long ll;
@@ -93,4 +93,4 @@ public:
 
 Current complexity:
 O(M*N) - Time
-
+S.C : O(m+n)
