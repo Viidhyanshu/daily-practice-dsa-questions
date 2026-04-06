@@ -73,3 +73,45 @@ commands[i] is either -2, -1, or an integer in the range [1, 9].
 0 <= obstacles.length <= 104
 -3 * 104 <= xi, yi <= 3 * 104
 The answer is guaranteed to be less than 231.
+
+
+
+//solution
+class Solution {
+public:
+    int robotSim(vector<int>& commands, vector<vector<int>>& obstacles) {
+        unordered_set<string> st;
+        for(vector<int>& obs : obstacles){
+            string key = to_string(obs[0])+"_"+to_string(obs[1]);
+            st.insert(key);
+        }
+        int x=0;
+        int y=0;
+        int maxDi=0;
+        pair<int ,int> dir={0,1};
+        for(int i =0; i < commands.size(); i++){
+            if(commands[i]== -2){
+                dir={-dir.second,dir.first};
+            }else if(commands[i] == -1){
+                dir={dir.second, -dir.first};
+             }else{
+                for(int step = 0; step < commands[i]; step++){
+                    int newX = x + dir.first;
+                    int newY = y + dir.second;
+                    string newKey = to_string(newX) + "_" + to_string(newY);
+                    if(st.find(newKey) != st.end()){
+                        break;
+                    }
+                    x = newX;
+                    y = newY;
+                }
+            }
+            maxDi = max(maxDi, x*x + y*y);
+        }
+        return maxDi;
+    }
+};
+
+
+TC= O(m + n* maxValues)
+SC = O(M)
