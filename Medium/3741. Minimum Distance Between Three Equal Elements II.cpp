@@ -48,3 +48,23 @@ Constraints:
 
 1 <= n == nums.length <= 105
 1 <= nums[i] <= n
+
+
+
+ //solution
+ class Solution {
+public:
+    int minimumDistance(vector<int>& nums) {
+        unorderd_map<int, vector><int>> mp;
+     int res = INT_MAX;
+     for(int i = 0; i < nums.size(); i++){
+      mp[nums[i]].push_back(i);
+      if(mp[nums[i]].size() >=3){
+        int sz = mp[nums[i]].size();
+                int first = mp[nums[i]][sz - 3];
+                int third = mp[nums[i]][sz - 1];
+                res = min(res, third - first);
+      }
+   }
+ }
+};
