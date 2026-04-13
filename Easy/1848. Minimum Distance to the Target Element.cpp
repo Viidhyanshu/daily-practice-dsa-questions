@@ -24,3 +24,21 @@ Output: 0
 Explanation: Every value of nums is 1, but nums[0] minimizes abs(i - start), which is abs(0 - 0) = 0.
 
 
+//solution
+
+TC = O(N);
+SC = O(1);
+
+class Solution{
+public:
+int getMinDistance(vector<int>& nums, int target, int start){
+int n = nums.size();
+int res = INT_MAX;
+for(int i = 0; i < n && res > abs(i-start); i++){
+if(nums[i] == target){
+res = min(res, abs(start - i));
+}
+}
+return res;
+}
+};
