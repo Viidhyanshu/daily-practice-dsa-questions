@@ -45,3 +45,24 @@ words[i] and target consist of only lowercase English letters.
 
   //solution
   
+class Solution {
+public:
+    int closestTarget(vector<string>& words, string target, int startIndex) {
+        int n = words.size();
+        int res = INT_MAX;
+
+        for (int i = 0; i < n; i++) {
+            if (words[i] == target) {
+                int linearDist = abs(i - startIndex);
+                int circularDist = n - linearDist;
+                int shortestDist = min(linearDist, circularDist);
+                res = min(res, shortestDist);
+            }
+        }
+
+        return res == INT_MAX ? -1 : res;
+    }
+};
+
+TC = O(n x l); // l = length of string 
+SC = O(1);
