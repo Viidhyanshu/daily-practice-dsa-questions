@@ -54,4 +54,30 @@ Constraints:
 1 <= nums[i] <= 109​​​​​​​
  
 //solution
-  
+  class Solution {
+public:
+    int revNum(int x){
+        int y = 0;
+        while(x){
+            y = y * 10 + x % 10;
+            x /= 10;
+        }
+        return y;
+    }
+    int minMirrorPairDistance(vector<int>& nums) {
+        unordered_map<int,int> mp;
+        int n = nums.size(), ans = n + 1;
+
+        for(int i=0;i<n;i++){
+            int x = nums[i];
+
+            if(mp.count(x))
+                ans = min(ans, i - mp[x]);
+
+            mp[revNum(x)] = i;
+        }
+        return ans == n + 1 ? -1 : ans;
+    }
+};
+
+
