@@ -66,18 +66,19 @@ public:
     }
     int minMirrorPairDistance(vector<int>& nums) {
         unordered_map<int,int> mp;
-        int n = nums.size(), ans = n + 1;
+        int n = nums.size(), res = n + 1;
 
         for(int i=0;i<n;i++){
             int x = nums[i];
 
             if(mp.count(x))
-                ans = min(ans, i - mp[x]);
+                res = min(ans, i - mp[x]);
 
             mp[revNum(x)] = i;
         }
-        return ans == n + 1 ? -1 : ans;
+        return res == n + 1 ? -1 : res;
     }
 };
+TC = O(nlogn);
 
 
