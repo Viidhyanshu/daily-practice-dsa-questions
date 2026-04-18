@@ -46,4 +46,20 @@ Constraints:
 
 
   //solution
-  
+  class Solution {
+       public:
+   int reverse (int a){
+    int b =0;
+    while (a > 0){
+     b = b * 10 + a % 10;
+     a =/ 10;
+    }
+    return b;
+   }
+   int mirrorDistance(int n) {
+    return abs(n-reverse(n));
+   }
+  };
+
+T.C. = O(logn)
+ O.C. = O(n)
