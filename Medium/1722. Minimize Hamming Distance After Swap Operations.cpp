@@ -36,3 +36,56 @@ allowedSwaps[i].length == 2
 0 <= ai, bi <= n - 1
 ai != bi
   //solution
+class Solution {
+public:
+    class UnionFind {
+    public:
+        vector<int> parent;
+        UnionFind(int n) {
+            parent.resize(n);
+            for (int i = 0; i < n; i++) parent[i] = i;
+        }
+        int find(int x) {
+            if (parent[x] != x)
+                parent[x] = find(parent[x]);
+            return parent[x];
+        }
+        void unite(int a, int b) {
+            int pa = find(a);
+            int pb = find(b);
+            if (pa != pb)
+                parent[pa] = pb;
+        }
+    };
+
+    int minimumHammingDistance(vector<int>& source, vector<int>& target, vector<vector<int>>& allowedSwaps) {
+        int n = source.size();
+        UnionFind uf(n);
+
+        for (auto& swap : allowedSwaps)
+            uf.unite(swap[0], swap[1]);
+
+        unordered_map<int, vector<int>> groups;
+
+        for (int i = 0; i < n; i++) {
+            int root = uf.find(i);
+            groups[root].push_back(i);
+        }
+        int hamming = 0;
+        for (auto& g : groups) {
+            unordered_map<int, int> count;
+
+            for (int idx : g.second)
+                count[source[idx]]++;
+
+            for (int idx : g.second) {
+                int val = target[idx];
+                if (count[val] > 0)
+                    count[val]--;
+                else
+                    hamming++;
+            }
+        }
+        return hamming;
+    }
+};
