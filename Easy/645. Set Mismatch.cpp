@@ -20,3 +20,21 @@ Constraints:
 
 2 <= nums.length <= 104
 1 <= nums[i] <= 104
+
+ //solution
+ class Solution {
+public:
+    vector<int> findErrorNums(vector<int>& nums) {
+     int n = nums.size();
+     vector <int> fq(n+1, 0);
+     int repeat =-1, miss =-1;
+     for(int x : nums)
+     fq[x]++;
+     for (int i = 1; i <= n; i++){
+        if(fq[i]==2 ) repeat =i;
+        if(fq[i]==0) miss= i;
+
+     }  
+     return {repeat, miss}; 
+    }
+};
