@@ -33,3 +33,23 @@ n == nums.length
 
   //solutiion
   
+class Solution {
+public:
+    int maxRotateFunction(vector<int>& nums) {
+        int n = nums.size();
+        int sum = 0;
+        int rot = 0;
+
+        for(int i = 0; i < n; i++) {
+            sum += nums[i];
+            rot += i*nums[i];
+        }
+        int result = rot;
+        for(int k = 0; k <= n-1; k++) {
+            int newRot = rot + sum - n*nums[n-1-k];
+            result = max(result, newRot);
+            rot = newRot;
+        }
+        return result;
+    }
+};
