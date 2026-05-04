@@ -9,3 +9,20 @@ n == matrix.length == matrix[i].length
 1 <= n <= 20
 -1000 <= matrix[i][j] <= 1000
   
+//solution
+  class Solution {
+public:
+    void rotate(vector<vector<int>>& matrix) {
+        int N = matrix.size();
+        for (int i = 0; i < N; i++) {
+            for (int j = i; j < N; j++) {
+                swap(matrix[i][j], matrix[j][i]);
+            }
+        }
+        for (int i = 0; i < N; i++) {
+            reverse(matrix[i].begin(), matrix[i].end());
+        }
+    }
+};
+T.C. = O(N^2)
+S.C. = O(1)
