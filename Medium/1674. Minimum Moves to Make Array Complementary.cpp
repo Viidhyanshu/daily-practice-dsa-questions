@@ -38,4 +38,35 @@ n is even.
 
 
   //solution
-  
+  class Solution {
+public:
+    int minMoves(vector<int>& nums, int limit) {
+        int n = nums.size();
+        vector<int> cost(2 * limit + 2);
+
+        for (int i = 0; i < n / 2; i++) {
+            int a = min(nums[i], nums[n - 1 - i]);
+            int b = max(nums[i], nums[n - 1 - i]);
+
+            cost[2] += 2;
+            cost[a + 1] -= 2;
+
+            cost[a + 1] += 1;
+            cost[a + b] -= 1;
+
+            cost[a + b + 1] += 1;
+            cost[b + limit + 1] -= 1;
+
+            cost[b + limit + 1] += 2;
+        }
+
+        int ans = n, curr = 0;
+
+        for (int c = 2; c <= 2 * limit; c++) {
+            curr += cost[c];
+            ans = min(ans, curr);
+        }
+
+        return ans;
+    }
+};
