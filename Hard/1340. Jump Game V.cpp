@@ -46,3 +46,7 @@ public:
          return maxJump;
     }
 };
+
+Approach Recursion & memoization
+T.C = O(n*d)
+S.C = O(n)
