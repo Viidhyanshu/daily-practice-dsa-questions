@@ -29,3 +29,25 @@ s[0] == '0'
 
 
 //solution
+class Solution {
+public:
+    bool canReach(string s, int minJump, int maxJump) {
+        int n = s.length();
+        int cnt = 0;
+        vector<bool> dp(n, false);
+        dp[0] = 1;
+        for (int i = 1; i < n; i++) {
+            if (i - minJump >= 0) {
+                cnt += dp[i - minJump];
+            }
+            if (i - maxJump - 1 >= 0) {
+                cnt -= dp[i - maxJump - 1];
+            }
+            if (cnt > 0 && s[i] == '0')
+                dp[i] = 1;
+        }
+        return dp[n - 1];
+    }
+};
+
+T.C. = O(N)
