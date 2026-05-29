@@ -46,4 +46,22 @@ Constraints:
 
   //solution
   
-
+class Solution {
+public:
+    int TotalSum(int n){
+        int sum =0;
+        while(n){
+            sum += n %10;
+            n /= 10;
+        }
+        return sum;
+    }
+    int minElement(vector<int>& nums) {
+        int a = INT_MAX;
+        for(int x : nums){
+            a = min(a, TotalSum(x));
+        }
+        return a;
+    }
+};
+T.C. O(NlogM)
