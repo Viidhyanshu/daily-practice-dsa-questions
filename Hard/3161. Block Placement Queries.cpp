@@ -16,3 +16,49 @@ The input is generated such that for queries of type 1, no obstacle exists at di
 The input is generated such that there is at least one query of type 2.
 
 //solution
+
+class Solution {
+public:
+    vector<bool> getResults(vector<vector<int>>& queries) {
+        vector<bool> result;
+
+        set<int> st;
+
+        for(auto &query : queries) {
+            if(query[0] == 1) { 
+                st.insert(query[1]); 
+            } else {
+                int x = query[1];
+                int sz = query[2];
+
+                int prev = 0;
+                bool found = false;
+
+                for(int curr : st) {
+                    if(curr > x) {
+                        break;
+                    }
+
+                    if(curr - prev >= sz) {
+                        found = true;
+                        break;
+                    }
+
+                    prev = curr;
+                }
+
+                if(!found) {
+                    found = (x - prev >= sz);
+                }
+
+                result.push_back(found);
+            }
+        }
+
+        return result;
+    }
+};
+
+Approach using brute force using ordered set
+T.C = O(M * N)
+S.C = O(N)
