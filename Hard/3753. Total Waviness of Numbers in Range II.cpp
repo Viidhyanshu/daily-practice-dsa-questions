@@ -59,37 +59,27 @@ Constraints:
  
  
 ​​​​//solution
- //Approach-1 (Digit DP - Counting waviness contribution per position)
-//T.C : O(n * 10 * 10 * 10) where n = number of digits ~ O(1) since n <= 15
-//S.C : O(n * 10 * 10) for memoization
 class Solution {
 public:
     typedef long long ll;
     string s;
     int n;
-
     ll dpTotalNumbers[16][10][10];
     ll dpTotalWaviness[16][10][10];
-
     pair<ll, ll> solve(int curr, int prevPrev, int prev, bool isLimitedWithActualNumber, bool isLeadingZero) {
         if (curr == n) {
-            return {1, 0}; // no more score can be generated and we found one last number
+            return {1, 0}; 
         }
-
         if (!isLimitedWithActualNumber && !isLeadingZero && prevPrev >= 0 && prev >= 0) {
             if (dpTotalNumbers[curr][prevPrev][prev] != -1) {
                 return {dpTotalNumbers[curr][prevPrev][prev], dpTotalWaviness[curr][prevPrev][prev]};
             }
         }
-
         ll totalNumbers   = 0;
         ll totalWaveScore = 0;
-
         int limitDigit = isLimitedWithActualNumber ? (s[curr] - '0') : 9;
-
         for (int digit = 0; digit <= limitDigit; digit++) {
             bool newIsLeadingZero = isLeadingZero && (digit == 0);
-
             int newPrevPrev = prev;
             int newPrev     = newIsLeadingZero ? -1 : digit;
             auto [remainTotalNumbers, remainTotalWaveScore] = solve(
@@ -128,4 +118,7 @@ public:
         return func(num2) - func(num1 - 1);
     }
 };
-​​​
+​
+by using digit DP
+T.C = O(n * 10 * 10 * 10) 
+S.C = O(n * 10 * 10) memoization​​
