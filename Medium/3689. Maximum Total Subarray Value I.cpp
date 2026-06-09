@@ -47,3 +47,21 @@ Constraints:
 1 <= n == nums.length <= 5 * 10​​​​​​​4
 0 <= nums[i] <= 109
 1 <= k <= 105
+
+
+ //solution
+ class Solution {
+public:
+    long long maxTotalValue(vector<int>& nums, int k) {
+        int n= nums.size();
+        int maxPossible = INT_MIN;
+        int minPossible = INT_MAX;
+        for(int &num : nums){
+        maxPossible = max(maxPossible, num);
+        minPossible = min(minPossible, num);
+        }
+        return 1L * k * (maxPossible - minPossible);
+    }
+};
+
+t.c. = O(n)
