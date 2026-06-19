@@ -21,3 +21,17 @@ Constraints:
 n == gain.length
 1 <= n <= 100
 -100 <= gain[i] <= 100
+
+//solution
+class Solution {
+public:
+    int largestAltitude(vector<int>& gain) {
+        int curr = 0;
+        int highest = curr;
+        for (int gain : gain) {
+            curr += gain;
+            highest = max(highest, curr);
+        }
+        return highest;
+    }
+};
