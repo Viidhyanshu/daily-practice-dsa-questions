@@ -48,3 +48,43 @@ Constraints:
 
 3 <= n <= 2000
 1 <= l < r <= 2000
+
+ //solution
+ class Solution {
+public:
+    static constexpr int MOD = 1'000'000'007;
+
+    int zigZagArrays(int n, int l, int r) {
+        int m = r - l + 1;
+
+        vector<long long> up(m, 1), down(m, 1);
+        vector<long long> newUp(m), newDown(m);
+
+        for (int i = 2; i <= n; i++) {
+            long long pref = 0;
+            for (int j = 0; j < m; j++) {
+                newUp[j] = pref;
+                pref = (pref + down[j]) % MOD;
+            }
+
+            long long suff = 0;
+            for (int j = m - 1; j >= 0; j--) {
+                newDown[j] = suff;
+                suff = (suff + up[j]) % MOD;
+            }
+
+            swap(up, newUp);
+            swap(down, newDown);
+        }
+
+        long long ans = 0;
+        for (int j = 0; j < m; j++) {
+            ans = (ans + up[j] + down[j]) % MOD;
+        }
+
+        return static_cast<int>(ans);
+    }
+};
+
+
+t.c. = o(mxn)
