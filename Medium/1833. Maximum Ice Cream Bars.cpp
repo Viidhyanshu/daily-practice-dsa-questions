@@ -33,3 +33,24 @@ costs.length == n
 1 <= n <= 105
 1 <= costs[i] <= 105
 1 <= coins <= 108
+
+ //solution
+ class Solution {
+public:
+    int maxIceCream(vector<int>& costs, int coins) {
+        sort(begin(costs), end(costs));
+        
+        int count = 0;
+        
+        for(int &cost : costs) {
+            if(cost > coins)
+                return count;
+            else {
+                count++;
+                coins -= cost;
+            }
+        }
+        
+        return count;
+    }
+};
