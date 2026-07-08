@@ -68,3 +68,7 @@ s consists of digits only.
 1 <= queries.length <= 105
 queries[i] = [li, ri]
 0 <= li <= ri < m
+
+
+ //solution
+ 
