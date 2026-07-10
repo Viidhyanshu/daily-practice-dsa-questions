@@ -144,3 +144,7 @@ public:
         return ans;
     }
 };
+
+
+
+t.c. = O(NlogN+QlogN)
