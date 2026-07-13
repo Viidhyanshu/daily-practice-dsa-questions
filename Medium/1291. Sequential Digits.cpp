@@ -47,3 +47,6 @@ public:
         return result;
     }
 };
+
+
+t.c. = o(1)
