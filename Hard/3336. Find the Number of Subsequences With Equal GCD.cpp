@@ -82,4 +82,4 @@ public:
 };
 
 
-t.c. = o(m x n x b)
+t.c. = o(m x b x b)
