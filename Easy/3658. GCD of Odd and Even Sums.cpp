@@ -37,3 +37,15 @@ Hence, GCD(sumOdd, sumEven) = GCD(25, 30) = 5.
 Constraints:
 
 1 <= n <= 10​​​​​​​00
+
+
+ //solution
+ class Solution {
+public:
+    int gcdOfOddEvenSums(int n) {
+        return n;
+    }
+};
+
+t.c. = o(n)
+s.c. = o(n) 
