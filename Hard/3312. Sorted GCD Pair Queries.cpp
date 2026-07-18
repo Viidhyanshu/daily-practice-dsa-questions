@@ -55,3 +55,43 @@ Constraints:
 
 
   //solution
+class Solution {
+public:
+    vector<int> gcdValues(vector<int>& nums, vector<long long>& queries) {
+        int m = 0;
+        for (int num : nums)
+            m = max(m, num);
+        vector<long long> count(m + 1, 0);
+        for (int num : nums)
+            count[num]++;
+        vector<long long> gcdPairs(m + 1, 0);
+        for (int i = 1; i <= m; i++) {
+            for (int j = i; j <= m; j += i)
+                gcdPairs[i] += count[j];
+            gcdPairs[i] = gcdPairs[i] * (gcdPairs[i] - 1) / 2;
+        }
+        for (int i = m; i >= 1; i--) {
+            for (int j = 2 * i; j <= m; j += i)
+                gcdPairs[i] -= gcdPairs[j];
+        }
+        vector<long long> presum(m + 1, 0);
+        for (int i = 1; i <= m; i++)
+            presum[i] = presum[i - 1] + gcdPairs[i];
+
+        vector<int> ans(queries.size());
+
+        for (int i = 0; i < (int)queries.size(); i++) {
+            long long k = queries[i] + 1;
+            int left = 1, right = m;
+            while (left < right) {
+                int mid = left + (right - left) / 2;
+                if (presum[mid] >= k)
+                    right = mid;
+                else
+                    left = mid + 1;
+            }
+            ans[i] = left;
+        }
+        return ans;
+    }
+};
