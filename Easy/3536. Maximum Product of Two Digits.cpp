@@ -47,3 +47,16 @@ Constraints:
 
 
   //solution 
+class Solution {
+public:
+    int maxProduct(int n) {
+        string s = to_string(n);
+        sort(s.begin(), s.end());
+        int len = s.size();
+        int a = s[len - 1] -'0';
+        int b = s[len - 2] - '0';
+        return a*b;
+    }
+};
+
+t.c. = o(nlogn)
