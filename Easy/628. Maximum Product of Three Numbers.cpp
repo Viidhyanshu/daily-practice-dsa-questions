@@ -20,3 +20,19 @@ Constraints:
 
 3 <= nums.length <= 104
 -1000 <= nums[i] <= 1000
+
+
+ //solution
+ class Solution {
+public:
+    int maximumProduct(vector<int>& nums) {
+        int n = nums.size();
+
+        sort(nums.begin(), nums.end());
+
+        return max((nums[n-1] * nums[n-2] * nums[n-3]), (nums[0] * nums[1] * nums[n-1]));
+    }
+};
+
+
+t.c. = o(nlogn)
