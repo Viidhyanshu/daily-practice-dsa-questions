@@ -44,3 +44,20 @@ Constraints:
 
 2 <= nums.length <= 100
 1 <= nums[i] <= 100
+
+ //solution
+ class Solution {
+public:
+    vector<int> findMissingElements(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        vector<int> missing;
+
+        int curr = nums[0];
+        for(int i = 0; i < nums.size(); i++){
+            while (nums[i] > curr) missing.push_back(curr++);
+            curr = nums[i] + 1;
+        }
+
+        return missing;
+    }
+};
