@@ -57,3 +57,54 @@ invocations[i] == [ai, bi]
 0 <= ai, bi <= n - 1
 ai != bi
 invocations[i] != invocations[j]
+
+
+
+//solution
+class Solution {
+public:
+    vector<int> remainingMethods(int n, int k, vector<vector<int>>& invocations) {
+     vector<vector<int>>adj(n);
+     for(auto &edge:invocations)
+     {
+        adj[edge[0]].push_back(edge[1]);
+     }   
+     vector<bool>issuspicious(n,false);
+     queue<int>q;
+     q.push(k);
+     issuspicious[k]=true;
+     while(!q.empty())
+     {
+        int node=q.front();
+        q.pop();
+        for(int neighbours:adj[node])
+        {
+            if(!issuspicious[neighbours])
+            {
+                issuspicious[neighbours]=true;
+                q.push(neighbours);
+            }
+        }
+     }
+     bool canremove=true;
+     for(auto &edge:invocations)
+     {
+        int u=edge[0];
+        int v=edge[1];
+        if(!issuspicious[u]&&issuspicious[v])
+        {
+            canremove=false;
+            break;
+        }
+     }
+     vector<int>res;
+     for(int i=0;i<n;i++)
+     {
+        if(!canremove||!issuspicious[i])
+        {
+            res.push_back(i);
+        }
+     }
+     return res;
+    }
+};
