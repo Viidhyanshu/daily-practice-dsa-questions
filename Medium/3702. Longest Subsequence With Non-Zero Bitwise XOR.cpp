@@ -33,4 +33,24 @@ Constraints:
 
 
   //solution
-  
+  class Solution {
+public:
+    int longestSubsequence(vector<int>& nums) {
+        int n = nums.size();
+        int result = 0;
+        bool all = true;
+        for(int &x : nums) {
+            result ^= x;
+            if(x != 0)
+                all = false;
+        }
+        if(all)
+            return 0;
+        return result == 0 ? n-1 : n;
+    }
+};
+
+t.c. = o(1)
+s.c. = o(1)
+
+
