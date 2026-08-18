@@ -57,4 +57,35 @@ Constraints:
 
 
   //solution
-  
+  class Solution {
+public:
+    int largestInteger(vector<int>& nums, int k) {
+         
+         unordered_map<int,int>mp;
+         for(auto it:nums) mp[it]++;
+         int n = nums.size();
+
+         int maxi=INT_MIN;
+         if(k==1)
+         {
+            
+            for(auto it:mp) {
+                if(it.second==1) maxi= max(maxi,it.first);
+            }
+           
+         }
+         else if( k==nums.size())
+         {
+           return *max_element(nums.begin(),nums.end());  
+         }
+         else
+         {
+            if(mp[nums[n-1]]==1) maxi= max(maxi, nums[n-1]);
+            if(mp[nums[0]]==1) maxi= max(maxi,nums[0]); 
+         }
+
+         return maxi==INT_MIN?-1:maxi;
+    }
+};
+
+t.c. = o(n)
