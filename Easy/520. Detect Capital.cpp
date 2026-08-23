@@ -24,3 +24,18 @@ word consists of lowercase and uppercase English letters.
 
   //solution
   
+class Solution {
+    public :
+    bool detectCapitalUse(string word){
+        int count = 0;
+        for(int i = 0 ; i < word.length() ; i++){
+            if(isupper(word[i])){
+                count ++;
+            }
+        }
+        return count == 0 || count == word.length() || (count == 1 && isupper(word[0]));
+    }
+};
+
+t.c.  = O(n)
+ s.c. = o(1)
