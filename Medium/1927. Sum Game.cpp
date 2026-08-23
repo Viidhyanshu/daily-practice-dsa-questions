@@ -44,3 +44,35 @@ num consists of only digits and '?'.
 
 
 //solution
+class Solution {
+public:
+    bool sumGame(string num) {
+        int n = num.size();
+        int lsum = 0, rsum = 0;
+        int lq = 0, rq = 0;
+        for (int i = 0; i < n / 2; i++) {
+            if (num[i] == '?')
+                lq++;
+            else
+                lsum += num[i] - '0';
+        }
+        for (int i = n / 2; i < n; i++) {
+            if (num[i] == '?')
+                rq++;
+            else
+                rsum += num[i] - '0';
+        }
+        if ((lq + rq) % 2)
+            return true;
+        int leftContribution = 0;
+        int rightContribution = 0;
+        if (lq > rq)
+            leftContribution += ((lq - rq) * 9) / 2;
+        else
+            rightContribution += ((rq - lq) * 9 )/ 2;
+        if(lsum+leftContribution == rsum+rightContribution) return false;
+        return true;
+    }
+};
+
+t.c. = O(N)
