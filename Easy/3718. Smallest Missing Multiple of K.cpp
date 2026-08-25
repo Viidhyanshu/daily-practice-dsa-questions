@@ -35,4 +35,16 @@ Constraints:
 
 
   ///solution
-  
+  class Solution {
+public:
+    int missingMultiple(vector<int>& nums, int k) {
+        int count = k;
+        unordered_set<int> visit (nums.begin(), nums.end());
+        while(visit.count(count)){
+            count += k;
+        }
+        return count;
+    }
+};
+
+t.c. = o(n)
