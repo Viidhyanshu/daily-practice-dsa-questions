@@ -33,4 +33,33 @@ Could you do it in-place with O(1) extra space?
 
 
   //solution
-  
+  class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n = nums.size();
+        k %= n;
+        reverse(nums.begin(), nums.end());
+        reverse(nums.begin(), nums.begin() + k);
+        reverse(nums.begin()  + k , nums.end());
+        
+    }
+};
+
+
+method - 2
+
+ 
+class Solution {
+    public :
+    void rotate(vector<int>& nums, int k){
+        int n = nums.size();
+        k %= n;
+        vector<int> turn(n);
+        for(int i =0; i < n; i++){
+            turn[(i + k) %n] = nums[i];
+        }
+        for(int i =0 ; i < n; i++){
+            nums[i] = turn[i];
+        }
+    }
+};
