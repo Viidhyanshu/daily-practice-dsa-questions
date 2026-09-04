@@ -21,3 +21,33 @@ n == nums.length
 -109 <= nums[i] <= 109
 The input is generated such that a majority element will exist in the array.
 
+//solution
+ class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int n = nums.size();
+        int count = 0;
+        int majority = -1;
+        for(int i =0; i < n; i++){
+            if(count == 0){
+                majority = nums[i];
+            }
+            if(nums[i] == majority){
+                count += 1;
+            }else{
+                count -= 1;
+            }
+        }
+        return majority;
+    }
+};
+
+
+class Solution{
+    public :
+    int majorityElement(vector<int>& nums){
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+        return nums[n/2];
+    }
+};
