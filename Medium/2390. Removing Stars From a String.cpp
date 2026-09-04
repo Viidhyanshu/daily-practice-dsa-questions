@@ -33,3 +33,27 @@ Constraints:
 1 <= s.length <= 105
 s consists of lowercase English letters and stars *.
 The operation above can be performed on s.
+
+ //solution
+ class Solution {
+public:
+    string removeStars(string s) {
+        stack<char> st;
+        for(char ch : s){
+            if(ch == '*'){
+                if(!st.empty()){
+                    st.pop();
+                }
+            }else{
+                st.push(ch);
+            }
+        }
+        string result;
+        while(!st.empty()){
+            result += st.top();
+            st.pop();
+        }
+        reverse(result.begin(), result.end());
+        return result;
+    }
+};
