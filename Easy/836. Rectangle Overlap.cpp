@@ -26,3 +26,19 @@ rec1.length == 4
 rec2.length == 4
 -109 <= rec1[i], rec2[i] <= 109
 rec1 and rec2 represent a valid rectangle with a non-zero area.
+
+
+ //solution
+ class Solution {
+public:
+    bool isRectangleOverlap(vector<int>& rec1, vector<int>& rec2) {
+        if (rec1[0] == rec1[2] || rec1[1] == rec1[3] ||
+            rec2[0] == rec2[2] || rec2[1] == rec2[3]) {
+            return false;
+        }
+        return !(rec1[2] <= rec2[0] ||   
+                 rec1[3] <= rec2[1] ||   
+                 rec1[0] >= rec2[2] ||   
+                 rec1[1] >= rec2[3]);  
+    }
+};
