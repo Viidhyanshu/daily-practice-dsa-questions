@@ -46,4 +46,16 @@ s contains only lowercase English letters.
 
 
   //solution
-  
+  class Solution {
+public:
+    int reverseDegree(string s) {
+        int n =s.size();
+        int res  =0 ;
+        for (int i = 1; i <= n; i++){
+            res += (26-(s[i-1]-'a')) *i;
+        }
+        return res;
+    }
+};
+
+t.c.= O(n)
