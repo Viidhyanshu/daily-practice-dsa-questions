@@ -41,3 +41,27 @@ Constraints:
 
 1 <= nums.length <= 100
 0 <= nums[i] <= 1000
+
+
+ //solution
+ class Solution {
+    int sum(int x){
+        int total = 0;
+        while(x>0){
+            total += x % 10;
+            x/= 10;
+        }
+        return total;
+    }
+public:
+    int smallestIndex(vector<int>& nums) {
+        for(int i =0; i < nums.size(); i++){
+            if(i==sum(nums[i])){
+                return i;
+            }
+        }
+        return -1;
+    }
+};
+
+t.c. = o(nlogm)
