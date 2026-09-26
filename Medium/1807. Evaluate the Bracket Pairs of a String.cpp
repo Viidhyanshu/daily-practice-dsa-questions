@@ -46,3 +46,33 @@ The key in each bracket pair of s will be non-empty.
 There will not be any nested bracket pairs in s.
 keyi and valuei consist of lowercase English letters.
 Each keyi in knowledge is unique.
+
+ //solution
+ class Solution {
+public:
+    string evaluate(string s, vector<vector<string>>& knowledge) {
+        int n = s.length();
+        unordered_map<string, string> mp;
+        for(auto &vec : knowledge) {
+            mp[vec[0]] = vec[1];
+        }
+        string result = "";
+        int i = 0;
+        while(i < n) {
+            if(isalpha(s[i])) {
+                result.push_back(s[i]);
+            } else { 
+                i++;
+                string temp = "";
+                while(i < n && s[i] != ')') {
+                    temp.push_back(s[i]);
+                    i++;
+                }
+                result += mp.count(temp) ? mp[temp] : "?";
+            }
+            i++;
+        }
+        return result;
+    }
+};
+
