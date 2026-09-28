@@ -35,3 +35,20 @@ Constraints:
 1 <= s.length <= 100
 s consists of digits 0-9 and characters '+', '-', '*', '/', '(', and ')'.
 It is guaranteed that parentheses expression s is a VPS.
+
+//solution
+class Solution {
+public:
+    int maxDepth(string s) {
+        int depth = 0, maxDepth = 0;
+        for (char c : s) {
+            if (c == '(') {
+                depth++;
+                if (depth > maxDepth) maxDepth = depth;
+            } else if (c == ')') {
+                depth--;
+            }
+        }
+        return maxDepth;
+    }
+};
