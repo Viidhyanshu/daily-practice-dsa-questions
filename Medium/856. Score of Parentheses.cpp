@@ -26,3 +26,22 @@ Constraints:
 2 <= s.length <= 50
 s consists of only '(' and ')'.
 s is a balanced parentheses string.
+
+
+ //solution
+ class Solution {
+public:
+    int scoreOfParentheses(string s) {
+        int n = s.length();
+        if(n == 2) return 1;
+        int score = 0 , depth = 0;
+        for(int i=0; i<n; i++) {
+            if(s[i] == '(') depth++;
+            else {
+                depth--;
+                if(s[i-1] == '(') score += 1 << depth;
+            }
+        }
+        return score;    
+    }
+};
