@@ -63,3 +63,54 @@ n == grid[i].length
 2 <= m, n <= 500
 grid[i][j] is either 0 or 1.
 grid[0][0] == grid[m - 1][n - 1] == 0
+
+ //solution
+ class Solution {
+public:
+    int uniquePaths(vector<vector<int>>& grid) {
+        int n = grid.size();
+        int m = grid[0].size();
+        int mod = 1e9 + 7;
+        vector<vector<vector<int>>> dp(
+            n, vector<vector<int>>(m, vector<int>(2, 0)));
+
+        dp[n - 1][m - 1] = {0, 1};
+        for (int i = n - 2; i >= 0; i--) {
+            if (grid[i][m - 1] == 1) {
+                dp[i][m - 1][0] = 1;
+                break;
+            }
+            dp[i][m - 1][0] = 1;
+        }
+        for (int i = m - 2; i >= 0; i--) {
+            if (grid[n - 1][i] == 1) {
+                dp[n - 1][i][1] = 1;
+                break;
+            }
+            dp[n - 1][i][1] = 1;
+        }
+        for (int i = n - 2; i >= 0; i--) {
+            for (int j = m - 2; j >= 0; j--) {
+                int d = 0, r = 0;
+
+                {
+                    d = grid[i + 1][j] == 1
+                            ? dp[i + 1][j][1]
+                            : ((dp[i + 1][j][0]) + (dp[i + 1][j][1])) % mod;
+
+                    r = grid[i][j + 1] == 1
+                            ? dp[i][j + 1][0]
+                            : ((dp[i][j + 1][0]) + (dp[i][j + 1][1])) % mod;
+                }
+
+                dp[i][j][0] = d;
+                dp[i][j][1] = r;
+            }
+        }
+        return ((dp[0][0][0]) + (dp[0][0][1])) % mod;
+    }
+};
+
+Time complexity : O(n × m)
+
+Space complexity : O(n × m)
