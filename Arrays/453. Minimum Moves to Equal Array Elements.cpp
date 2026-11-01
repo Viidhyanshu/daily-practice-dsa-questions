@@ -22,3 +22,21 @@ n == nums.length
 1 <= nums.length <= 105
 -109 <= nums[i] <= 109
 The answer is guaranteed to fit in a 32-bit integer.
+
+
+ //solution
+ class Solution {
+public:
+    int minMoves(vector<int>& nums) {
+        int n = nums.size();
+        int sum = 0;
+        int ele = INT_MAX;
+        for (int i = 0; i < n; i++) {
+            sum += nums[i];
+            ele = min(ele, nums[i]);
+        }
+        return sum - n * ele;
+    }
+};
+
+t.c. = o(n)
