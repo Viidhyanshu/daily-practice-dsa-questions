@@ -39,3 +39,25 @@ Constraints:
 1 <= arr1.length, arr2.length <= 500
 -1000 <= arr1[i], arr2[j] <= 1000
 0 <= d <= 100
+
+ //solution
+ class Solution {
+public:
+    int findTheDistanceValue(vector<int>& arr1, vector<int>& arr2, int d) {
+        int count = 0;
+
+        for (int& num1 : arr1) {
+            bool valid = true;
+
+            for (int& num2 : arr2) {
+                if(abs(num1 - num2) <= d) {
+                    valid = false;
+                    break;
+                }
+            }
+            count += valid; 
+        }
+
+        return count;
+    }
+};
