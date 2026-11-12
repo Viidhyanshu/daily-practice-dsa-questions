@@ -50,3 +50,29 @@ Constraints:
 
 1 <= nums.length <= 50
 1 <= nums[i] <= 50
+
+
+ //solution
+ class Solution {
+public:
+    int longestMonotonicSubarray(vector<int>& nums) {
+        int n = nums.size();
+        int res = 0;
+        for (int i = 0; i < n; i++) {
+            int inc = 1;
+            int j = i + 1;
+            while (j < n && nums[j] > nums[j - 1]) {
+                inc++;
+                j++;
+            }
+            j = i + 1;
+            int dec = 1;
+            while(j < n && nums[j] < nums[j-1]){
+                dec++;
+                j++;
+            }
+            res = max({res, inc, dec});
+        }
+        return res;
+    }
+};
