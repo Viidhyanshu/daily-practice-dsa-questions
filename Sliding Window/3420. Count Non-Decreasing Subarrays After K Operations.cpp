@@ -45,3 +45,55 @@ Constraints:
 1 <= nums.length <= 105
 1 <= nums[i] <= 109
 1 <= k <= 109
+
+
+ //solution
+ class Solution {
+public:
+    long countNonDecreasingSubarrays(
+        vector<int>& nums,
+        int k
+    ) {
+        long long answer = 0;
+        long long cost = 0;
+        deque<pair<int, int>> dq;
+
+        int j = (int)nums.size() - 1;
+        for (int i = (int)nums.size() - 1; i >= 0; i--) {
+            int num = nums[i];
+            int count = 1;
+
+            while (!dq.empty() && dq.back().first < num) {
+                auto [nextNum, nextCount] = dq.back();
+
+                dq.pop_back();
+
+                count += nextCount;
+
+                cost += 1LL * (num - nextNum) * nextCount;
+            }
+
+            dq.emplace_back(num, count);
+            while (cost > k) {
+                auto [rightmostNum, rightmostCount] = dq.front();
+
+                dq.pop_front();
+
+                cost -= 1LL * (rightmostNum - nums[j]);
+
+                j--;
+
+                if (rightmostCount > 1) {
+                    dq.emplace_front(
+                        rightmostNum,
+                        rightmostCount - 1
+                    );
+                }
+            }
+
+            answer += j - i + 1LL;
+        }
+
+        return answer;
+    }
+};
