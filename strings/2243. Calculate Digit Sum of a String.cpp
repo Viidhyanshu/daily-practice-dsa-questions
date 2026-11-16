@@ -36,3 +36,24 @@ Constraints:
 1 <= s.length <= 100
 2 <= k <= 100
 s consists of digits only.
+
+
+ //solution
+ class Solution {
+public:
+    string digitSum(string s, int k) {
+        while(s.size() > k){
+        int n = s.size();
+            string temp;
+            for(int i = 0 ; i < n ; i+=k){
+                int ans  = 0;
+                for(int j = i; j < min(i+k,n); ++j){
+                    ans+= s[j] -'0';
+                }
+                temp.append(to_string(ans));
+            }
+            s=temp;
+        }
+        return s;
+    }
+};
