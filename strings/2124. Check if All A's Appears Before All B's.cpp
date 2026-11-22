@@ -37,3 +37,11 @@ Constraints:
 
 1 <= s.length <= 100
 s[i] is either 'a' or 'b'.
+
+ //solution
+ class Solution {
+public:
+    bool checkString(string s) {
+        return is_sorted(begin(s),end(s));
+    }
+};
