@@ -38,3 +38,21 @@ Alice cannot remove 10 stones, so Alice loses.
 Constraints:
 
 1 <= n <= 50
+
+
+ //solution
+ class Solution {
+public:
+    bool canAliceWin(int n) {
+        int take = 10;
+        int steps = 0;
+
+        while (n >= take) {
+            n -= take;
+            take--;
+            steps++;
+        }
+
+        return steps % 2 == 1;
+    }
+};
