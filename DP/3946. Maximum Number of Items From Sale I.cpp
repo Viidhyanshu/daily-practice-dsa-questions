@@ -44,3 +44,51 @@ Constraints:
 items[i] = [factori, pricei]
 1 <= factori, pricei <= 1500
 1 <= budget <= 1500
+
+
+ //solution
+ class Solution {
+public:
+    int maximumSaleItems(vector<vector<int>>& items, int budget) {
+       
+        int n = (int)items.size();
+
+        unordered_map<int, int> cnt;
+        for (auto &x : items) {
+            cnt[x[0]]++;
+        }
+        vector<int> mult(1501, 0);
+        for (int d = 1; d <= 1500; d++) {
+            for (int x = d; x <= 1500; x += d) {
+                mult[d] += cnt[x];
+            }
+        }
+        vector<int> dp(budget + 1, 0);
+
+        for (int i = 0; i < n; i++) {
+            int factor = items[i][0];
+            int price  = items[i][1];
+
+            int bonus = mult[factor] - 1;
+
+            vector<int> ndp = dp; 
+
+            for (int r = 0; r < price && r <= budget; r++) {
+                int best = INT_MIN;
+
+                for (int q = 0, cur = r; cur <= budget; q++, cur += price) {
+
+                    ndp[cur] = max(ndp[cur], dp[cur]);
+                    if (best != INT_MIN) {
+                        ndp[cur] = max(ndp[cur], q + bonus + best);
+                    }
+                    best = max(best, dp[cur] - q);
+                }
+            }
+
+            dp.swap(ndp);
+        }
+
+        return *max_element(dp.begin(), dp.end());
+    }
+};
